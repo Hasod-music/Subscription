@@ -6,95 +6,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #0f0f0f;
-      color: #e0e0e0;
-      font-family: 'Rubik', sans-serif;
-      margin: 0;
-      padding: 30px;
-      text-align: center;
-    }
-
-    h1 {
-      color: #00f7c2;
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1.1em;
-      color: #ccc;
-      margin-bottom: 20px;
-    }
-
-    .paypal-container {
-      margin: 30px auto;
-    }
-
-    form {
-      max-width: 400px;
-      margin: 30px auto;
-      background: #1a1a1a;
-      padding: 20px;
-      border-radius: 10px;
-      border: 1px solid #333;
-    }
-
-    .form-field {
-      margin-bottom: 15px;
-      text-align: right;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 500;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      background: #111;
-      border: 1px solid #444;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 1em;
-    }
-
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: #00f7c2;
-      box-shadow: 0 0 4px #00f7c2;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #00f7c2;
-      color: #000;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      font-size: 1em;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #00dab0;
-    }
+    body{background:#0f0f0f;color:#e0e0e0;font-family:'Rubik',sans-serif;margin:0;padding:30px;text-align:center}
+    h1{color:#00f7c2;font-size:2em;margin-bottom:10px}
+    p{font-size:1.1em;color:#ccc;margin-bottom:20px}
+    .paypal-container{margin:30px auto}
+    form{max-width:420px;margin:40px auto;background:#1a1a1a;padding:25px;border-radius:12px;border:1px solid #333;text-align:right}
+    .form-field{margin-bottom:18px}
+    label{display:block;margin-bottom:6px;font-weight:500}
+    input,textarea{width:100%;padding:10px;background:#111;border:1px solid #444;border-radius:6px;color:#fff;font-size:.95em}
+    input:focus,textarea:focus{outline:none;border-color:#00f7c2;box-shadow:0 0 4px #00f7c2}
+    button{width:100%;padding:12px;background:#00f7c2;color:#000;border:none;border-radius:6px;font-weight:bold;font-size:1em;cursor:pointer}
+    button:hover{background:#00dab0}
   </style>
 </head>
 <body>
   <h1>קבלו גישה לרמיקסים הכי חזקים בעולם</h1>
-  <p>הצטרפו למנוי הסודי וקבלו גישה לתיקייה שמתעדכנת <strong>יום-יום</strong> עם הרמיקסים הלוהטים ביותר.</p>
+  <p>הצטרפו למנוי הסודי וקבלו גישה לתיקייה שמתעדכנת <strong>יום‑יום</strong> עם הרמיקסים הלוהטים ביותר.</p>
 
   <div class="paypal-container">
     <div id="paypal-button-container"></div>
   </div>
 
-  <form id="contactForm">
-    <h2 style="color:#00f7c2;">צור קשר</h2>
+  <!-- iframe חבוי כדי שהמשתמש לא ייצא מהדף -->
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
 
+  <form id="contactForm" target="hidden_iframe" action="https://docs.google.com/forms/d/e/1FAIpQLSdhLcA5fIrCoO5JsF_IhxNCepI7ZJgDV5vWCnie6JPHSz7scA/formResponse" method="POST" onsubmit="return sendForm(event);">
+    <h2 style="color:#00f7c2;text-align:center">צור קשר</h2>
+
+    <!-- שדות טופס גלויים -->
     <div class="form-field">
       <label for="name">שם מלא *</label>
       <input type="text" id="name" name="entry.2005620554" required>
@@ -106,57 +45,38 @@
     </div>
 
     <div class="form-field">
-      <label for="phone">מספר טלפון *</label>
+      <label for="phone">טלפון *</label>
       <input type="tel" id="phone" name="entry.1166974658" pattern="^05\d{8}$" placeholder="05XXXXXXXX" required>
     </div>
 
     <div class="form-field">
-      <label for="message">ההודעה שלך *</label>
-      <textarea id="message" name="entry.839337160" rows="4" required></textarea>
+      <label for="message">הודעה *</label>
+      <textarea id="message" name="entry.839337160" rows="3" required></textarea>
     </div>
+
+    <!-- שדות חבויים ש‑Google Forms מצפה להם -->
+    <input type="hidden" name="fvv" value="1">
+    <input type="hidden" name="fbzx" value="${Date.now()}">
+    <input type="hidden" name="pageHistory" value="0">
 
     <button type="submit">שלח הודעה</button>
   </form>
 
   <script src="https://www.paypal.com/sdk/js?client-id=AQwe6BxX1gZcvKPiaaWGbJcDJ-3OWjWrd81-20gVqTGLAa2HHbRqQNFRQaBKkqrrHl3LOFJudPQahe4L&vault=true&intent=subscription"></script>
   <script>
-    paypal.Buttons({
-      style: {
-        shape: 'rect',
-        color: 'gold',
-        layout: 'vertical',
-        label: 'subscribe'
-      },
-      createSubscription: function(data, actions) {
-        return actions.subscription.create({
-          plan_id: 'P-70P8198976840891ENAW62JQ'
-        });
-      },
-      onApprove: function(data, actions) {
-        alert('תודה על ההרשמה! מזהה מנוי: ' + data.subscriptionID);
-      }
-    }).render('#paypal-button-container');
-  </script>
+    paypal.Buttons({style:{shape:'rect',color:'gold',layout:'vertical',label:'subscribe'},createSubscription:(d,a)=>a.subscription.create({plan_id:'P-70P8198976840891ENAW62JQ'}),onApprove:d=>alert('תודה! מזהה מנוי: '+d.subscriptionID)}).render('#paypal-button-container');
 
-  <script>
-    const contactForm = document.getElementById('contactForm');
-
-    contactForm.addEventListener('submit', function(e) {
+    function sendForm(e){
       e.preventDefault();
-
-      const formData = new FormData(contactForm);
-
-      fetch('https://docs.google.com/forms/d/e/1FAIpQLSdhLcA5fIrCoO5JsF_IhxNCepI7ZJgDV5vWCnie6JPHSz7scA/formResponse', {
-        method: 'POST',
-        mode: 'no-cors',
-        body: formData
-      }).then(() => {
-        alert('ההודעה נשלחה בהצלחה!');
-        contactForm.reset();
-      }).catch(() => {
-        alert('אירעה שגיאה בשליחה.');
-      });
-    });
+      const form=e.target;
+      // fbzx חייב להיות ייחודי; נעדכן לפני השליחה
+      form.querySelector('input[name="fbzx"]').value=Date.now();
+      // שלח בטופס רגיל (iframe חבוי), ואז הצג הודעה
+      form.submit();
+      alert('ההודעה נשלחה בהצלחה!');
+      form.reset();
+      return false;
+    }
   </script>
 </body>
 </html>
