@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>הסוד – מנוי לרמיקסים</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #000;
+      color: #00ff00;
+      font-family: 'Rubik', sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      max-width: 600px;
+      margin: 0 auto 30px auto;
+    }
+
+    #paypal-button-container-P-70P8198976840891ENAW62JQ {
+      display: inline-block;
+      margin: 30px auto;
+    }
+
+    form {
+      margin-top: 40px;
+    }
+
+    input, textarea {
+      width: 90%;
+      max-width: 400px;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-family: inherit;
+      background-color: #111;
+      color: #00ff00;
+      border: 1px solid #00ff00;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #00ff00;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .glow {
+      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- כותרת -->
+  <h1 class="glow">קבלו גישה לרמיקסים הכי חזקים בעולם</h1>
+  <p>
+    הצטרפו למנוי הסודי וקבלו גישה לתיקייה שמתעדכנת <strong>יום-יום</strong> עם הרמיקסים הלוהטים ביותר.  
+    רק למי שבאמת יודע לחפש.
+  </p>
+  <p><em>Subscribe now and unlock daily updated access to the world’s top remixes.</em></p>
+
+  <!-- כפתור PayPal חדש -->
+  <div id="paypal-button-container-P-70P8198976840891ENAW62JQ"></div>
+
+  <!-- טופס יצירת קשר -->
+  <form name="contact" method="POST" data-netlify="true">
+    <input type="hidden" name="form-name" value="contact">
+    <h2 class="glow">שלחו לנו הודעה</h2>
+    <input type="text" name="name" placeholder="שם מלא" required><br>
+    <input type="email" name="email" placeholder="כתובת אימייל" required><br>
+    <textarea name="message" rows="4" placeholder="ההודעה שלכם" required></textarea><br>
+    <button type="submit">שלח</button>
+  </form>
+
+  <!-- PayPal SDK וכפתור -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AQwe6BxX1gZcvKPiaaWGbJcDJ-3OWjWrd81-20gVqTGLAa2HHbRqQNFRQaBKkqrrHl3LOFJudPQahe4L&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+  <script>
+    paypal.Buttons({
+        style: {
+            shape: 'rect',
+            color: 'gold',
+            layout: 'vertical',
+            label: 'subscribe'
+        },
+        createSubscription: function(data, actions) {
+          return actions.subscription.create({
+            plan_id: 'P-70P8198976840891ENAW62JQ'
+          });
+        },
+        onApprove: function(data, actions) {
+          alert(data.subscriptionID); // ניתן לשים כאן הודעת הצלחה מותאמת
+        }
+    }).render('#paypal-button-container-P-70P8198976840891ENAW62JQ');
+  </script>
+
+</body>
+</html>
