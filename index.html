@@ -4,28 +4,31 @@
   <meta charset="UTF-8">
   <title>הסוד – מנוי לרמיקסים</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+  
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
     body {
-      background-color: #000;
-      color: #00ff00;
-      font-family: 'Rubik', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+      color: #ffffff;
+      font-family: 'Orbitron', sans-serif;
       text-align: center;
       padding: 40px;
     }
 
-    h1 {
-      font-size: 2em;
-      margin-bottom: 10px;
+    h1, h2 {
+      font-size: 2.2em;
+      color: #ff00cc;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #ff00cc, 0 0 20px #ff00cc;
     }
 
     p {
       font-size: 1.2em;
       max-width: 600px;
       margin: 0 auto 30px auto;
+      color: #e0e0e0;
     }
 
     #paypal-button-container-P-70P8198976840891ENAW62JQ {
@@ -34,64 +37,74 @@
     }
 
     form {
-      margin-top: 40px;
+      margin-top: 50px;
+      border: 2px solid #00ffff;
+      border-radius: 15px;
+      padding: 20px;
+      display: inline-block;
+      background-color: #111;
+      box-shadow: 0 0 20px #00ffff44;
     }
 
     input, textarea {
       width: 90%;
       max-width: 400px;
-      margin-bottom: 10px;
-      padding: 10px;
+      margin-bottom: 15px;
+      padding: 12px;
       font-family: inherit;
-      background-color: #111;
-      color: #00ff00;
-      border: 1px solid #00ff00;
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #00ffff;
+      border-radius: 6px;
     }
 
     button {
-      padding: 10px 20px;
-      background-color: #00ff00;
+      padding: 12px 24px;
+      background-color: #00ffff;
       color: #000;
       border: none;
       cursor: pointer;
       font-weight: bold;
+      border-radius: 6px;
+      transition: 0.3s;
     }
 
-    .glow {
-      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+    button:hover {
+      background-color: #00ccff;
+      box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
     }
   </style>
 </head>
 <body>
 
   <!-- כותרת -->
-  <h1 class="glow">קבלו גישה לרמיקסים הכי חזקים בעולם</h1>
+  <h1>קבלו גישה לרמיקסים הכי חזקים בעולם</h1>
   <p>
     הצטרפו למנוי הסודי וקבלו גישה לתיקייה שמתעדכנת <strong>יום-יום</strong> עם הרמיקסים הלוהטים ביותר.  
     רק למי שבאמת יודע לחפש.
   </p>
   <p><em>Subscribe now and unlock daily updated access to the world’s top remixes.</em></p>
 
-  <!-- כפתור PayPal חדש -->
+  <!-- כפתור PayPal -->
   <div id="paypal-button-container-P-70P8198976840891ENAW62JQ"></div>
 
   <!-- טופס יצירת קשר -->
   <form name="contact" method="POST" data-netlify="true">
     <input type="hidden" name="form-name" value="contact">
-    <h2 class="glow">שלחו לנו הודעה</h2>
+    <h2>שלחו לנו הודעה</h2>
     <input type="text" name="name" placeholder="שם מלא" required><br>
     <input type="email" name="email" placeholder="כתובת אימייל" required><br>
     <textarea name="message" rows="4" placeholder="ההודעה שלכם" required></textarea><br>
     <button type="submit">שלח</button>
   </form>
 
-  <!-- PayPal SDK וכפתור -->
+  <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AQwe6BxX1gZcvKPiaaWGbJcDJ-3OWjWrd81-20gVqTGLAa2HHbRqQNFRQaBKkqrrHl3LOFJudPQahe4L&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
   <script>
     paypal.Buttons({
         style: {
             shape: 'rect',
-            color: 'gold',
+            color: 'silver',
             layout: 'vertical',
             label: 'subscribe'
         },
@@ -101,7 +114,7 @@
           });
         },
         onApprove: function(data, actions) {
-          alert(data.subscriptionID); // ניתן לשים כאן הודעת הצלחה מותאמת
+          alert("המנוי הופעל בהצלחה! קוד: " + data.subscriptionID);
         }
     }).render('#paypal-button-container-P-70P8198976840891ENAW62JQ');
   </script>
