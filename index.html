@@ -4,80 +4,100 @@
   <meta charset="UTF-8">
   <title>הסוד – מנוי לרמיקסים</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- עיצוב כללי -->
   <style>
     body {
-      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
-      color: #ffffff;
-      font-family: 'Orbitron', sans-serif;
+      background-color: #0d0d0d;
+      color: #e0e0e0;
+      font-family: 'Rubik', sans-serif;
+      margin: 0;
+      padding: 40px 20px;
       text-align: center;
-      padding: 40px;
     }
 
-    h1, h2 {
-      font-size: 2.2em;
-      color: #ff00cc;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px #ff00cc, 0 0 20px #ff00cc;
+    h1 {
+      color: #00ffcc;
+      font-size: 2em;
+      margin-bottom: 10px;
     }
 
     p {
       font-size: 1.2em;
       max-width: 600px;
-      margin: 0 auto 30px auto;
-      color: #e0e0e0;
+      margin: 0 auto 30px;
+      color: #ccc;
     }
 
-    #paypal-button-container-P-70P8198976840891ENAW62JQ {
-      display: inline-block;
-      margin: 30px auto;
+    .paypal-container {
+      margin: 40px auto;
     }
 
+    /* טופס */
     form {
-      margin-top: 50px;
-      border: 2px solid #00ffff;
-      border-radius: 15px;
-      padding: 20px;
-      display: inline-block;
-      background-color: #111;
-      box-shadow: 0 0 20px #00ffff44;
+      max-width: 500px;
+      margin: 50px auto 20px;
+      text-align: right;
     }
 
-    input, textarea {
-      width: 90%;
-      max-width: 400px;
+    .form-field {
       margin-bottom: 15px;
-      padding: 12px;
-      font-family: inherit;
-      background-color: #222;
-      color: #fff;
-      border: 1px solid #00ffff;
-      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
     }
 
-    button {
-      padding: 12px 24px;
-      background-color: #00ffff;
-      color: #000;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
+    .form-field label {
+      color: #eee;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      background: #1a1a1a;
+      border: 1px solid #444;
       border-radius: 6px;
+      padding: 12px;
+      color: #fff;
+      font-size: 1em;
       transition: 0.3s;
     }
 
-    button:hover {
-      background-color: #00ccff;
-      box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: #00ffcc;
+      box-shadow: 0 0 4px #00ffcc;
+    }
+
+    .form-button {
+      background: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .form-button:hover {
+      background: #00ddb3;
+    }
+
+    footer {
+      margin-top: 50px;
+      color: #666;
+      font-size: 0.9em;
     }
   </style>
 </head>
 <body>
 
-  <!-- כותרת -->
   <h1>קבלו גישה לרמיקסים הכי חזקים בעולם</h1>
   <p>
     הצטרפו למנוי הסודי וקבלו גישה לתיקייה שמתעדכנת <strong>יום-יום</strong> עם הרמיקסים הלוהטים ביותר.  
@@ -86,36 +106,59 @@
   <p><em>Subscribe now and unlock daily updated access to the world’s top remixes.</em></p>
 
   <!-- כפתור PayPal -->
-  <div id="paypal-button-container-P-70P8198976840891ENAW62JQ"></div>
+  <div class="paypal-container">
+    <div id="paypal-button-container-P-70P8198976840891ENAW62JQ"></div>
+  </div>
 
-  <!-- טופס יצירת קשר -->
-  <form name="contact" method="POST" data-netlify="true">
-    <input type="hidden" name="form-name" value="contact">
-    <h2>שלחו לנו הודעה</h2>
-    <input type="text" name="name" placeholder="שם מלא" required><br>
-    <input type="email" name="email" placeholder="כתובת אימייל" required><br>
-    <textarea name="message" rows="4" placeholder="ההודעה שלכם" required></textarea><br>
-    <button type="submit">שלח</button>
+  <!-- טופס צור קשר -->
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLSdhLcA5fIrCoO5JsF_IhxNCepI7ZJgDV5vWCnie6JPHSz7scA/formResponse" method="POST" target="_blank">
+    <h2 style="color:#00ffcc; text-align:center;">צור קשר</h2>
+
+    <div class="form-field">
+      <label for="name">שם מלא *</label>
+      <input type="text" id="name" name="entry.2005620554" required>
+    </div>
+
+    <div class="form-field">
+      <label for="email">כתובת אימייל *</label>
+      <input type="email" id="email" name="entry.1045781291" required>
+    </div>
+
+    <div class="form-field">
+      <label for="phone">מספר טלפון *</label>
+      <input type="tel" id="phone" name="entry.1166974658" pattern="^05\d{8}$" required placeholder="05XXXXXXXX">
+    </div>
+
+    <div class="form-field">
+      <label for="message">ההודעה שלך *</label>
+      <textarea id="message" name="entry.839337160" rows="4" required></textarea>
+    </div>
+
+    <button class="form-button" type="submit">שליחה</button>
   </form>
+
+  <footer>
+    האתר נוצר עבור חובבי מוזיקה אמיתיים. נגן אותו חזק 🎧
+  </footer>
 
   <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AQwe6BxX1gZcvKPiaaWGbJcDJ-3OWjWrd81-20gVqTGLAa2HHbRqQNFRQaBKkqrrHl3LOFJudPQahe4L&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
   <script>
     paypal.Buttons({
-        style: {
-            shape: 'rect',
-            color: 'silver',
-            layout: 'vertical',
-            label: 'subscribe'
-        },
-        createSubscription: function(data, actions) {
-          return actions.subscription.create({
-            plan_id: 'P-70P8198976840891ENAW62JQ'
-          });
-        },
-        onApprove: function(data, actions) {
-          alert("המנוי הופעל בהצלחה! קוד: " + data.subscriptionID);
-        }
+      style: {
+        shape: 'rect',
+        color: 'gold',
+        layout: 'vertical',
+        label: 'subscribe'
+      },
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          plan_id: 'P-70P8198976840891ENAW62JQ'
+        });
+      },
+      onApprove: function(data, actions) {
+        alert('תודה על ההרשמה! מזהה מנוי: ' + data.subscriptionID);
+      }
     }).render('#paypal-button-container-P-70P8198976840891ENAW62JQ');
   </script>
 
