@@ -124,11 +124,17 @@
 </head>
 <body>
   <h1>קבלו גישה לרמיקסים הכי חזקים בעולם</h1>
-  <p>הצטרפו למנוי הסודי וקבלו גישה לתיקייה שמתעדכנת <strong>יום‑יום</strong> עם הרמיקסים הטובים ביותר.</p>
+  <p>
+    הצטרפו למנוי הסודי וקבלו גישה לתיקייה שמתעדכנת <strong>יום‑יום</strong> עם הרמיקסים הטובים ביותר.
+    <br><strong>עלות המנוי: 69 ש"ח לחודש.</strong>
+  </p>
 
   <div class="main-container">
     <div class="paypal-container">
       <div id="paypal-button-container"></div>
+      <p style="margin-top: 10px; font-size: 0.9em; color: #aaa;">
+        התשלום מתבצע בכרטיס אשראי דרך PayPal. אין צורך בחשבון PayPal.
+      </p>
     </div>
 
     <form id="contactForm">
@@ -165,14 +171,15 @@
         shape: 'rect',
         color: 'gold',
         layout: 'vertical',
-        label: 'subscribe'
+        label: 'subscribe',
+        tagline: false
       },
-      createSubscription: (data, actions) => {
+      createSubscription: function(data, actions) {
         return actions.subscription.create({
           plan_id: 'P-70P8198976840891ENAW62JQ'
         });
       },
-      onApprove: data => {
+      onApprove: function(data, actions) {
         alert('תודה! מזהה מנוי: ' + data.subscriptionID);
       }
     }).render('#paypal-button-container');
