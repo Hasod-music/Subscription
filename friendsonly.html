@@ -5,14 +5,12 @@
   <title>הסוד – מנוי לרמיקסים (בהנחה)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- ✅ Open Graph Meta Tags -->
   <meta property="og:title" content="Hasod Music Bank" />
   <meta property="og:description" content="Get access to the ultimate remix music bank – fresh, exclusive, and constantly updated." />
   <meta property="og:image" content="https://i1.sndcdn.com/avatars-001211909173-ox3qje-t500x500.jpg" />
   <meta property="og:url" content="https://hasod-music.github.io/Subscription/discount" />
   <meta property="og:type" content="website" />
-
+  <link rel="icon" href="https://raw.githubusercontent.com/Hasod-music/Subscription/main/logo.png" type="image/png" />
   <style>
     body {
       background: #0f0f0f;
@@ -99,6 +97,14 @@
     button:hover {
       background: #00dab0;
     }
+    .paypal-container {
+      display: none;
+      margin-top: -20px;
+    }
+    #contactForm {
+      transform: scale(0.9);
+      margin-top: 50px;
+    }
     @media (max-width: 600px) {
       .main-container {
         padding: 0 10px;
@@ -110,16 +116,31 @@
   <h1>קבלו גישה לרמיקסים הכי חזקים בעולם</h1>
   <p>
     הצטרפו למנוי הסודי וקבלו גישה לתיקייה שמתעדכנת <strong>יום‑יום</strong> עם הרמיקסים הטובים ביותר.
-    <br>
-    <span class="discount">69 ש"ח</span>
-    <strong>0.1 ש"ח לחודש בלבד לזמן מוגבל!</strong>
+    <br><span class="discount">69 ש"ח</span> <strong>49 ש"ח לחודש בלבד לזמן מוגבל!</strong>
   </p>
-
   <div class="main-container">
-    <div class="paypal-container">
+    <form id="prePayForm">
+      <h2>רכישת מנוי</h2>
+      <div class="form-field">
+        <label for="sub-name">שם מלא *</label>
+        <input type="text" id="sub-name" required>
+      </div>
+      <div class="form-field">
+        <label for="sub-email">אימייל *</label>
+        <input type="email" id="sub-email" required>
+      </div>
+      <div class="form-field">
+        <label for="sub-phone">טלפון *</label>
+        <input type="tel" id="sub-phone" pattern="^05\d{8}$" placeholder="05XXXXXXXX" required>
+      </div>
+      <button type="submit">רכש עכשיו ב-49 ש"ח לחודש</button>
+    </form>
+    <div class="paypal-container" id="paypal-container">
       <div id="paypal-button-container-P-4TS05390XU019010LNAY3XOI"></div>
+      <p style="margin-top: 10px; font-size: 0.9em; color: #aaa;">
+        התשלום מתבצע בכרטיס אשראי דרך PayPal. אין צורך בחשבון PayPal.
+      </p>
     </div>
-
     <form id="contactForm">
       <h2>צור קשר</h2>
       <div class="form-field">
@@ -141,7 +162,6 @@
       <button type="submit">שלח הודעה</button>
     </form>
   </div>
-
   <script src="https://www.paypal.com/sdk/js?client-id=AQwe6BxX1gZcvKPiaaWGbJcDJ-3OWjWrd81-20gVqTGLAa2HHbRqQNFRQaBKkqrrHl3LOFJudPQahe4L&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
   <script>
     paypal.Buttons({
@@ -160,9 +180,35 @@
         alert('תודה! מזהה מנוי: ' + data.subscriptionID);
       }
     }).render('#paypal-button-container-P-4TS05390XU019010LNAY3XOI');
-  </script>
 
-  <script>
+    document.getElementById('prePayForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const name = document.getElementById('sub-name').value.trim();
+      const email = document.getElementById('sub-email').value.trim();
+      const phone = document.getElementById('sub-phone').value.trim();
+      if (!name || !email || !phone.match(/^05\d{8}$/)) {
+        alert('אנא מלאי את כל הפרטים בצורה תקינה');
+        return;
+      }
+      try {
+        const response = await fetch('https://hook.eu2.make.com/o6yebej9w6s9tf4s47bfkx68uxx0y7wf', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            email,
+            phone,
+            message: 'subscription attempt (discounted)'
+          })
+        });
+        if (!response.ok) throw new Error();
+        document.getElementById('paypal-container').style.display = 'block';
+        alert('נרשמת בהצלחה. כעת ניתן להמשיך לתשלום.');
+      } catch (err) {
+        alert('אירעה שגיאה בשליחת הטופס. נסי שוב מאוחר יותר.');
+      }
+    });
+
     document.getElementById('contactForm').addEventListener('submit', async function (e) {
       e.preventDefault();
       const formData = {
@@ -184,7 +230,7 @@
           alert('שגיאה בשליחת ההודעה. נסו שוב מאוחר יותר.');
         }
       } catch (err) {
-        alert('הייתה שגיאה בחיבור. בדקו את האינטרנט ונסו שוב.');
+        alert('הייתה שגיאה בחיבור. בדקי את האינטרנט ונסי שוב.');
       }
     });
   </script>
