@@ -205,28 +205,17 @@
 
   <!-- PayPal Script -->
   <script src="https://www.paypal.com/sdk/js?client-id=AQwe6BxX1gZcvKPiaaWGbJcDJ-3OWjWrd81-20gVqTGLAa2HHbRqQNFRQaBKkqrrHl3LOFJudPQahe4L&vault=true&intent=subscription"></script>
-  <script>
-    paypal.Buttons({
-      style: {
-        shape: 'rect',
-        color: 'gold',
-        layout: 'vertical',
-        label: 'subscribe',
-        tagline: false
-      },
-      createSubscription: function (data, actions) {
-        return actions.subscription.create({
-          plan_id: 'P-70P8198976840891ENAW62JQ'
-        });
-      },
-      onApprove: function (data, actions) {
-        alert('תודה על הצטרפותך למנוי! מזהה מנוי: ' + data.subscriptionID);
-      }
-    }).render('#paypal-button-container');
-  </script>
 
-  <!-- שליחת ניסיון רכישה -->
   <script>
+    function generateUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+
+    let customId = '';
+
     document.getElementById('prePayForm').addEventListener('submit', async function (e) {
       e.preventDefault();
 
@@ -240,11 +229,13 @@
         return;
       }
 
+      customId = generateUUID();
+
       try {
         const response = await fetch('https://hook.eu2.make.com/o6yebej9w6s9tf4s47bfkx68uxx0y7wf', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, phone, message: 'subscription attempt' })
+          body: JSON.stringify({ name, email, phone, customId, message: 'subscription attempt' })
         });
 
         if (!response.ok) throw new Error();
@@ -256,6 +247,25 @@
         alert('אירעה שגיאה בשליחת הטופס. נסי שוב מאוחר יותר.');
       }
     });
+
+    paypal.Buttons({
+      style: {
+        shape: 'rect',
+        color: 'gold',
+        layout: 'vertical',
+        label: 'subscribe',
+        tagline: false
+      },
+      createSubscription: function (data, actions) {
+        return actions.subscription.create({
+          plan_id: 'P-70P8198976840891ENAW62JQ',
+          custom_id: customId
+        });
+      },
+      onApprove: function (data, actions) {
+        alert('תודה על הצטרפותך למנוי! מזהה מנוי: ' + data.subscriptionID);
+      }
+    }).render('#paypal-button-container');
   </script>
 
   <!-- שליחת צור קשר -->
@@ -294,5 +304,6 @@
       }
     });
   </script>
+
 </body>
 </html>
